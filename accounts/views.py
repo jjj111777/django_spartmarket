@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 #회원가입입
 def signup(request):
@@ -26,3 +28,24 @@ def user_login(request):
         else:
             messages.error(request, '아이디 또는 비밀번호가 잘못되었습니다.')
     return render(request, 'accounts/login.html')
+
+#로그아웃
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')  # 로그아웃 후 홈으로 이동
+
+#유저 프로필
+def profile(request):
+    user = request.user
+    # 유저가 등록한 물건과 찜한 물건을 가져옵니다.
+    user_products = user.products.all()
+    liked_products = user.liked_products.all()
+
+    return render(request, 'accounts/profile.html', {
+        'user': user,
+        'user_products': user_products,
+        'liked_products': liked_products
+    })

@@ -1,0 +1,16 @@
+<h1>{{ user.username }}의 프로필</h1>
+<p>가입일: {{ user.date_joined }}</p>
+
+<h2>내가 등록한 물건</h2>
+<ul>
+    {% for product in user_products %}
+        <li>{{ product.name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>내가 찜한 물건</h2>
+<ul>
+    {% for product in liked_products %}
+        <li>{{ product.name }}</li>
+    {% endfor %}
+</ul>
