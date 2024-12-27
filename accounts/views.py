@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-#회원가입입
+#회원가입
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -49,3 +49,7 @@ def profile(request):
         'user_products': user_products,
         'liked_products': liked_products
     })
+
+#홈 페이지 설정정
+def home(request):
+    return render(request, 'home.html')  # 'home.html' 템플릿을 렌더링
